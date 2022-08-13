@@ -10,4 +10,5 @@ DEBUG = True
 
 
 # TODO IMPLEMENT DATABASE URL
-SQLALCHEMY_DATABASE_URI = '<Put your local database url>'
+SQLALCHEMY_DATABASE_URI = 'postgresql://collins:postgres.01@localhost:5432/demo'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
