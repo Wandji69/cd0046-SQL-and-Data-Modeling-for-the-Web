@@ -39,7 +39,7 @@ class Venue(db.Model):
     show = db.relationship('Show', backref='venue', lazy=True)
 
     def __repr__(self):
-        return f'<Venue: ID: {self.Venue.id}, name: {self.Venue.name}, genres: {self.Venue.genres}, city: {self.Venue.city}, state: {self.Venue.state}>'
+        return f'<Venue: ID: {self.id}, name: {self.name}, genres: {self.genres}, city: {self.city}, state: {self.state}>'
 
 
 class Artist(db.Model):

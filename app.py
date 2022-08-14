@@ -122,7 +122,7 @@ def show_venue(venue_id):
             "artist_id": artist_data.id,
             "artist_name": artist_data.name,
             "artist_image_link": artist_data.image_link,
-            "start_time": datetime.strptime(d.start_time, "%Y-%m-%d %H:%M:%S")
+            "start_time": datetime.strftime(d.start_time, "%Y-%m-%d %H:%M:%S")
         })
     data1 = {
         "id": data.id,
