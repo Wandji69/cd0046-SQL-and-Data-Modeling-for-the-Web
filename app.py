@@ -3,16 +3,8 @@
 #----------------------------------------------------------------------------#
 
 from __future__ import generator_stop
-from curses import meta
-from datetime import date
-from email.policy import default
-from itertools import count
-import json
-from lib2to3.pgen2.tokenize import generate_tokens
-from os import abort, stat
+from os import abort
 import sys
-from turtle import up
-from unicodedata import name
 import dateutil.parser
 import babel
 from flask import Flask, render_template, request, Response, flash, redirect, url_for
@@ -136,11 +128,6 @@ def venues():
             d.state,
             d.city
         ))
-        past_shows_data = data.show
-        upcoming_shows_data = [
-            show for show in past_shows_data if
-            (datetime.strptime(show.start_time, "%Y-%m-%d %H:%M:%S") > datetime.now())
-        ]
     venue_data = []
 
     for state, city in mydata:
@@ -150,7 +137,7 @@ def venues():
             "venues": [{
                 "id": venue.id,
                 "name": venue.name,
-                "nu_upcoming_shows": len(upcoming_shows_data)
+                "nu_upcoming_shows": len(venue.show)
             } for venue in data if venue.city == city and venue.state == state]
         })
     # DONE: replace with real venues data.
