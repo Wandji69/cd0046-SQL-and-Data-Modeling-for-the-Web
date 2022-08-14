@@ -1,11 +1,17 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask import Flask
+from flask_migrate import Migrate
+from flask_moment import Moment
 
+#----------------------------------------------------------------------------#
+# App Config.
+#----------------------------------------------------------------------------#
 app = Flask(__name__)
-db = SQLAlchemy(app)
+moment = Moment(app)
+app.config.from_object('config')
 
 # DONE: connect to a local postgresql database
+db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 #----------------------------------------------------------------------------#
@@ -33,7 +39,7 @@ class Venue(db.Model):
     show = db.relationship('Show', backref='venue', lazy=True)
 
     def __repr__(self):
-        return f'<Venue: ID: {self.id}, name: {self.name}, genres: {self.genres}, city: {self.city}, state: {self.state}>'
+        return f'<Venue: ID: {self.Venue.id}, name: {self.Venue.name}, genres: {self.Venue.genres}, city: {self.Venue.city}, state: {self.Venue.state}>'
 
 
 class Artist(db.Model):
@@ -63,7 +69,7 @@ class Artist(db.Model):
 class Show(db.Model):
     __tablename__ = 'show'
     id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(db.String())
+    start_time = db.Column(db.DateTime())
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'), nullable=False)
     artist_id = db.Column(db.Integer, db.ForeignKey(
         'artist.id'), nullable=False)
