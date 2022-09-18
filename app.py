@@ -8,7 +8,7 @@ import sys
 from time import strptime
 import dateutil.parser
 import babel
-from flask import Flask, render_template, request, Response, flash, redirect, url_for
+from flask import render_template, request, Response, flash, redirect, url_for
 import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
@@ -57,7 +57,7 @@ def venues():
             d.city
         ))
     venue_data = []
-
+    
     for state, city in mydata:
         venue_data.append({
             "state": state,
@@ -68,6 +68,8 @@ def venues():
                 "nu_upcoming_shows": len(venue.show)
             } for venue in data if venue.city == city and venue.state == state]
         })
+
+    print(venue_data)
     # DONE: replace with real venues data.
     # num_upcoming_shows should be aggregated based on number of upcoming shows per venue.
     return render_template('pages/venues.html', areas=venue_data)
